@@ -10,11 +10,13 @@
 
         <draggable :list="column.tasks" :animation="150" item-key="id"
           :group="{ name: 'tasks', pull: ctrl ? 'clone' : true }" handle=".drag-handle">
-          <TrelloBoardTask v-for="task in column.tasks" :key="task.id" :task="task" />
+          <TrelloBoardTask v-for="task in column.tasks" :key="task.id" :task="task" @delete="
+            column.tasks = column.tasks.filter((task) => task.id !== $event)
+            " />
         </draggable>
 
         <footer>
-          <button class="text-gray-500">+ Add a card</button>
+          <NewTask @add="column.tasks.push($event)" />
         </footer>
       </div>
     </draggable>
@@ -74,7 +76,7 @@ const columns = ref<Column[]>([
 ]);
 </script>
 
-<style scoped>
+<style>
 /* .sortable-chosen { */
 /*   background-color: green; */
 /* } */
