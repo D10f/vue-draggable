@@ -8,7 +8,8 @@
           <h3 class="font-bold mb-4">{{ column.title }}</h3>
         </header>
 
-        <draggable :list="column.tasks" :animation="150" item-key="id" group="tasks" handle=".drag-handle">
+        <draggable :list="column.tasks" :animation="150" item-key="id"
+          :group="{ name: 'tasks', pull: ctrl ? 'clone' : true }" handle=".drag-handle">
           <TrelloBoardTask v-for="task in column.tasks" :key="task.id" :task="task" />
         </draggable>
 
@@ -24,6 +25,8 @@
 import { nanoid } from "nanoid";
 import { VueDraggableNext as draggable } from "vue-draggable-next";
 import type { Column } from "~/types";
+
+const ctrl = useKeyModifier("Control");
 
 // not necessary to import ref from vue due to nuxt!
 const columns = ref<Column[]>([
