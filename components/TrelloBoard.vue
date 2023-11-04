@@ -73,3 +73,17 @@ const columns = ref<Column[]>([
   },
 ]);
 </script>
+
+<style scoped>
+/* .sortable-chosen { */
+/*   background-color: green; */
+/* } */
+
+.sortable-drag {
+  transform: rotate(5deg);
+}
+
+.sortable-ghost {
+  @apply bg-slate-300 text-transparent;
+}
+</style>
